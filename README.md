@@ -89,4 +89,29 @@ docker compose exec adl adl createsuperuser
 The `adl`command is shorthand for `python manage.py` command. You can use it to run any Django management command
 inside the container.
 
+## Bouy Data Parameters
+
+| Key        | Description                                | Units                           |
+|------------|--------------------------------------------|---------------------------------|
+| `obs_time` | Observation Time                           | ISO8601 timestamp (UTC)         |
+| `tp`       | Peak period (reciprocal of peak frequency) | **seconds (s)**                 |
+| `dirp`     | Wave direction at peak frequency           | **degrees (° from true north)** |
+| `sprp`     | Directional spread at peak frequency       | **degrees (°)**                 |
+| `tz`       | Zero-upcrossing period                     | **seconds (s)**                 |
+| `hs`       | Significant wave height                    | **centimetres (cm)**            |
+| `ti`       | Integral period (Tm(-2,0))                 | **seconds (s)**                 |
+| `t1`       | Mean period (Tm(0,1))                      | **seconds (s)**                 |
+| `tc`       | Crest period (Tm(2,4))                     | **seconds (s)**                 |
+| `tdw2`     | Wave period Tm(-1,1)                       | **seconds (s)**                 |
+| `tdw1`     | Peak period estimator                      | **seconds (s)**                 |
+| `tpc`      | Calculated peak period                     | **seconds (s)**                 |
+| `nu`       | Longuet-Higgins bandwidth parameter        | **dimensionless**               |
+| `eps`      | Bandwidth parameter                        | **dimensionless**               |
+| `qp`       | Goda’s peakedness parameter                | **dimensionless**               |
+| `ss`       | Significant steepness                      | **dimensionless**               |
+| `tref`     | Reference temperature                      | **°C**                          |
+| `tsea`     | Sea surface temperature                    | **°C**                          |
+| `bat`      | Battery status                             | (0 = empty to 7 = full)         |                                  
+
+
 

@@ -3,6 +3,7 @@ import logging
 import pandas as pd
 from adl_ftp_plugin.registries import FTPDecoder
 from django.utils import timezone as dj_timezone
+from adl_ftp_plugin.utils import get_dates_to_now
 
 logger = logging.getLogger(__name__)
 
@@ -34,20 +35,23 @@ class BouySCDecoder(FTPDecoder):
     compat_type = "bouy_sc"
     display_name = "Bouy Decoder - Seychelles"
     
-    def get_matching_files(self, station_link, files):
+    def get_matching_files(self, station_link, files, start_date=None, end_date=None):
         # get all the initial matching files
-        matching_files = super().get_matching_files(station_link, files)
-        
-        if station_link.start_date:
-            return matching_files
+        matching_files = super().get_matching_files(station_link, files, start_date, end_date)
         
         timezone = station_link.timezone
+        current_time = dj_timezone.localtime(dj_timezone.now(), timezone=timezone)
         
         # sample file name Seychelles}2025-08.his. Here 08 is the month of the year
         # we only want the files that contain the date of today in the name
-        zero_padded_this_month = [
-            f"{dj_timezone.localtime(timezone=timezone).year}-{str(dj_timezone.now().month).zfill(2)}"]
-        matching_files = [file for file in matching_files if any(date in file for date in zero_padded_this_month)]
+        
+        zero_padded_months_until_now = [current_time.strftime("%Y-%m")]
+        if start_date:
+            zero_padded_months_until_now = get_dates_to_now(date_granularity="month", from_date=start_date,
+                                                            timezone=timezone, as_string=True,
+                                                            str_format="%Y-%m")
+        
+        matching_files = [file for file in matching_files if any(date in file for date in zero_padded_months_until_now)]
         
         return matching_files
     

@@ -5,7 +5,7 @@ from setuptools import find_packages, setup
 
 PROJECT_DIR = os.path.dirname(__file__)
 REQUIREMENTS_DIR = os.path.join(PROJECT_DIR, "requirements")
-VERSION = "0.0.1"
+VERSION = "0.1.0"
 
 
 def get_requirements(env):
@@ -22,11 +22,11 @@ install_requires = get_requirements("base")
 setup(
     name="adl-bouy-sc-ftp-decoder",
     version=VERSION,
-    url="TODO",
-    author="TODO",
-    author_email="TODO",
-    license="TODO",
-    description="TODO",
+    url="https://github.com/seychelles-met/adl-bouy-sc-ftp-decoder",
+    author="Seychelles Meteorological Authority",
+    author_email="info@meteo.sc",
+    license="MIT",
+    description="About ADL FTP Plugin for decoding Seychelles Bouy data",
     long_description="TODO",
     platforms=["linux"],
     package_dir={"": "src"},

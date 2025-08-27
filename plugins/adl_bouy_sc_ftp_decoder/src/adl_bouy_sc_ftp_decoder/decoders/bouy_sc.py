@@ -74,7 +74,7 @@ class BouySCDecoder(FTPDecoder):
         df = pd.read_csv(file_path, header=None, names=col_names)
         
         # Parse time column as datetime
-        df["obs_time"] = pd.to_datetime(df["obs_time"])
+        df["observation_time"] = pd.to_datetime(df["obs_time"])
         
         records = df.to_dict(orient="records", )
         
